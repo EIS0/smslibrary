@@ -3,7 +3,9 @@ package com.eis.smslibrary;
 import com.eis.communication.CommunicationHandler;
 import com.eis.communication.Message;
 
-
+/**
+ * Class handling SMS Communication for both sending and receiving SMSMessages
+ */
 public class SMSHandler implements CommunicationHandler<SMSMessage> {
 
     private SMSHandler instance;
@@ -30,7 +32,7 @@ public class SMSHandler implements CommunicationHandler<SMSMessage> {
      */
     @Override
     public void sendMessage(SMSMessage message) {
-        //Test pull request
+
     }
 
     /**
@@ -38,6 +40,13 @@ public class SMSHandler implements CommunicationHandler<SMSMessage> {
      * @param listener The listener of type SMSMessage
      */
     public void addReceiveListener(ReceivedMessageListener<SMSMessage> listener){
+
+    }
+
+    /**
+     * Removes the listener observing for incoming SMSMessages if set, else does nothing.
+     */
+    public void removeReceiveListener(){
 
     }
 }
