@@ -24,12 +24,14 @@ public class MainActivity extends AppCompatActivity implements ActivityCompat.On
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         if (requestCode == RECEIVE_SMS_PERMISSION && permissions[0].equals(Manifest.permission.RECEIVE_SMS))
-            if (grantResults[0] != PackageManager.PERMISSION_GRANTED)
+            if (grantResults[0] != PackageManager.PERMISSION_GRANTED) {
                 //if permission to receive SMS was not granted, ask to grant it
                 Toast.makeText(this, "You must grant permission to receive SMS", Toast.LENGTH_LONG).show();
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.RECEIVE_SMS}, RECEIVE_SMS_PERMISSION);
+            }
         if (requestCode == SEND_SMS_PERMISSION && permissions[0].equals(Manifest.permission.SEND_SMS))
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED)
-                //if permission to send SMS was granted, send a message
+                //if permission to send SMS was granted, send the message
                 this.sendMessage();
             else
                 Toast.makeText(this, "You must grant permission to send SMS", Toast.LENGTH_LONG).show();
@@ -41,7 +43,6 @@ public class MainActivity extends AppCompatActivity implements ActivityCompat.On
         setContentView(R.layout.activity_main);
         // check if RECEIVE_SMS permission was granted
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.RECEIVE_SMS) != PackageManager.PERMISSION_GRANTED) {
-            // if not
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.RECEIVE_SMS}, RECEIVE_SMS_PERMISSION);
         }
     }
@@ -49,7 +50,6 @@ public class MainActivity extends AppCompatActivity implements ActivityCompat.On
     public void sendButtonPressed(View view) {
         // check if SEND_SMS permission was granted
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED) {
-            // if not
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.SEND_SMS}, SEND_SMS_PERMISSION);
         }
         else
@@ -64,6 +64,4 @@ public class MainActivity extends AppCompatActivity implements ActivityCompat.On
         SMSMessage message = new SMSMessage(new SMSPeer(number), text);
         SMSManager.getInstance().sendMessage(message);
     }
-
-
 }
