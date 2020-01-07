@@ -82,7 +82,7 @@ public class SMSPeer implements Peer<String>, Comparable<SMSPeer>, java.io.Seria
     }
 
     /**
-     * Return a parsed PhoneNumber object.
+     * Return a parsed {@link Phonenumber.PhoneNumber} object.
      *
      * @param number The destination string, eventually with the prefix.
      * @return The PhoneNumber object containing the phone number parsed.
